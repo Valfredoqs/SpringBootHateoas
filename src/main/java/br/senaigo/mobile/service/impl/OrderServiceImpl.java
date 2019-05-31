@@ -65,8 +65,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@Transactional
 	public void delete(Order entity) {
-		// TODO Auto-generated method stub
-		
+		try {
+			orderRepository.delete(entity);
+		} catch (Exception e) {
+			logger.error("Error ao deletar registro.");
+		}
 	}
 
 	@Override
@@ -106,8 +109,11 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> get() {
-		// TODO Auto-generated method stub
+		try {
+			return orderRepository.findAll();
+		} catch (Exception e) {
+			logger.error("Error ao recuperar registro." +e.getMessage());
+		}
 		return null;
 	}
-
 }
